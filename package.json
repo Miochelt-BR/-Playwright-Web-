@@ -1,0 +1,23 @@
+{
+  "name": "-playwright-web-",
+  "version": "1.0.0",
+  "description": "![Playwright](https://playwright.dev/img/playwright-logo.svg)",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miochelt-BR/-Playwright-Web-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Miochelt-BR/-Playwright-Web-/issues"
+  },
+  "homepage": "https://github.com/Miochelt-BR/-Playwright-Web-#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.13.13"
+  }
+}
