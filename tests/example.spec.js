@@ -1,19 +1,32 @@
-// @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect, chromium } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://automationpratice.com.br/login');
+test('Fazer login no site', async () => {
+  // Inicia o navegador (modo visível para debug)
+  const browser = await chromium.launch({ headless: false });
+  const context = await browser.newContext();
+  const page = await context.newPage();
 
-  // Expect a title "to contain" a substring.
-  
-});
+  // Acessa a página de login
+  await page.goto('https://automationpratice.com.br/login', { timeout: 60000 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  // Aguarda os campos de e-mail e senha ficarem visíveis
+  await page.waitForSelector('#user', { timeout: 10000 });
+  await page.waitForSelector('#password', { timeout: 10000 });
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  // Insere os dados de login
+  await page.fill('#user', 'teste@email.com');
+  await page.fill('#password', '123456');
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  // Clica no botão de login usando o 'getByRole'
+  const loginButton = await page.locator('role=button[name="login"]');
+  await loginButton.click();
+
+  // Aguarda um feedback da página
+  await page.waitForTimeout(5000);
+
+  // Exibe o título da página após login (para verificar se deu certo)
+  console.log('Título da página após login:', await page.title());
+
+  // Fecha o navegador
+  await browser.close();
 });
